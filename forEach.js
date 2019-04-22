@@ -57,3 +57,26 @@ reference to it (by name). Do not call it!
 numbers.forEach(adder);
 // Print sum variable
 sum;
+/*
+So why use specifically the forEach helper?
+It is when you want to execute some generic
+function on every element in an array.
+
+Here are some more examples:
+*/
+
+/*
+Calculating areas of images and putting
+those calculations in a new array.
+*/
+
+var images = [
+  { height: 10, width: 30 },
+  { height: 20, width: 90 },
+  { height: 54, width: 32 }
+];
+var areas = [];
+
+images.forEach(function(image) {
+  areas.push(image.height * image.width);
+});
