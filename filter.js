@@ -12,10 +12,10 @@ Say we have a list of grocery items. We'll
 represent each item as an object.
 */
 var products = [
-  { name : 'cucumber', type: 'vegetable' },
-  { name : 'banana', type: 'fruit' },
-  { name : 'celery', type: 'vegetable' },
-  { name : 'orange', type: 'fruit' }
+  { name: 'cucumber', type: 'vegetable' },
+  { name: 'banana', type: 'fruit' },
+  { name: 'celery', type: 'vegetable' },
+  { name: 'orange', type: 'fruit' }
 ];
 
 /*
@@ -87,4 +87,30 @@ products.filter(function(product) {
 
 /*
 Looks much cleaner and easier to discern!
+
+Let's extends our example a bit. We've added
+a quantity and price property on each
+product.
+*/
+var products = [
+  { name: 'cucumber', type: 'vegetable', quantity: 0, price: 1 },
+  { name: 'banana', type: 'fruit', quantity: 10, price: 15 },
+  { name: 'celery', type: 'vegetable', quantity: 30, price: 9 },
+  { name: 'orange', type: 'fruit', quantity: 3, price: 5 }
+];
+
+/*
+Let's write a filter where we only want to
+keep products that are a vegetable, and
+have a quantity greater than 0 (read: in
+stock), and are priced at most 10.
+*/
+products.filter(function(product) {
+  return (product.type === 'vegetable' &&
+          product.quantity > 0 &&
+          product.price <= 10);
+});
+
+/*
+only the celery product matched our filter.
 */
