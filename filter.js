@@ -112,5 +112,101 @@ products.filter(function(product) {
 });
 
 /*
-only the celery product matched our filter.
+Only the celery product matched our filter.
 */
+
+/*
+So... what are the practical applications of
+filter? An example: say we have some posts
+and some comments. A post can have multiple
+comments. Each post has a postId associated
+with it, and each comment also contains the
+postId of the post it belongs to.
+
+Given some post, and a list of comments,
+what if we want to get a list of all the
+comments associated with that post?
+*/
+
+var post = { id: 4, title: 'New Post' };
+
+var comments = [
+  { postId: 4, content: 'awesome post' },
+  { postId: 3, content: 'it was ok' },
+  { postId: 4, content: 'neat' }
+];
+
+function commentsForPost(post, comments) {
+  return comments.filter(function(comment) {
+    return comment.postId == post.id;
+  });
+}
+
+commentsForPost(post, comments);
+
+/*
+Pretty cool!
+
+Here are some more examples. In this one, we
+are given an array numbers and only want to
+get numbers that are greater than 50.
+*/
+
+var numbers = [15, 25, 35, 45, 55, 65, 75, 85, 95];
+
+var filteredNumbers = numbers.filter(function(number) {
+  // return numbers that are greater than 50.
+  return number > 50;
+});
+
+filteredNumbers;
+
+/*
+In this next example, we are given an array
+of users. We want to get users that have
+admin access.
+*/
+
+var users = [
+ { id: 1, admin: true },
+ { id: 2, admin: false },
+ { id: 3, admin: false },
+ { id: 4, admin: false },
+ { id: 5, admin: true },
+];
+
+var filteredUsers = users.filter(function(user) {
+  return user.admin;
+});
+
+filteredUsers;
+
+/*
+And in our last example, something a bit more
+complicated. We're gonna create a reject function,
+which works in the opposide way of filter.
+It takes an array, a callback function, and only
+filters out those that return false for the
+callback!
+
+We can use filter for this.
+*/
+
+function reject(array, iteratorFunction) {
+  return array.filter(function(element) {
+    /*
+    Check the iterator function against the
+    element, and then negate the result!
+    */
+    return !iteratorFunction(element);
+  });
+}
+
+var numbers = [10, 20, 30];
+
+var lessThanFifteen = reject(numbers, function(number) {
+  return number > 15;
+});
+
+lessThanFifteen;
+                         
