@@ -74,3 +74,60 @@ For a case where we want all elements
 matching some condition, then the filter
 function should be used instead.
 */
+
+/*
+Let's try a new example with Car objects.
+*/
+function Car(model) {
+  this.model = model;
+}
+
+var cars = [
+  new Car('Buick'),
+  new Car('Camaro'),
+  new Car('Focus')
+];
+
+/*
+What if we want to find the Car with the
+with the model 'Focus'? Let's approach
+this using the find helper.
+*/
+cars.find(function(car) {
+  return car.model === 'Focus';
+});
+
+/*
+Looking good! Let's do another example
+with the posts and comments scenario we
+discussed a while ago.
+*/
+
+var posts = [
+  { id: 1, title: 'New Post' },
+  { id: 2, title: 'Old Post' }
+];
+
+/*
+We have a single comment here, unlike
+the previous scenario where we had
+multiple.
+*/
+var comment = {
+  postId: 1,
+  content: 'Great Post'
+};
+
+/*
+Now we want to write a function that
+takes a list of posts, a single comment,
+then finds the post for which the
+comment belongs to.
+*/
+function postForComment(posts, comment) {
+  return posts.find(function(post) {
+    return post.id === comment.postId;
+  });
+}
+
+postForComment(posts, comment);
