@@ -131,3 +131,48 @@ function postForComment(posts, comment) {
 }
 
 postForComment(posts, comment);
+
+/*
+In what situation would we use the
+find helper in a practical sense? We
+can have a list of blog posts in
+a forum that a user and click on
+(and then be redirected to a page of
+that blog post).
+
+The url for the list of posts would
+be forum.com/posts, and for some
+post with id 45, it would be
+forum.com/posts/45.
+
+So if we want to fetch the whole blog
+post for the one with some particular
+id, then we extract the id from the
+url, and then use the find helper
+with that id to find the post and
+display it's content.
+*/
+
+/*
+Let's go through more examples:
+
+In this example, we are given an
+array of users that have an admin
+property which is either true or
+false (for whether or not they're
+an admin). We want to use the find
+helper to look for the user that
+is an admin.
+*/
+
+var users = [
+  { id: 1, admin: false },
+  { id: 2, admin: false },
+  { id: 3, admin: true }
+];
+
+var admin = users.find(function(user) {
+	return user.admin;
+});
+
+admin;
