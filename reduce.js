@@ -50,3 +50,79 @@ return the value. This new value is
 then used as sum in the next loop... and
 so on. The end result is finally returned.
 */
+
+/*
+Now let's try a more complicated example.
+We'll be working with an array of primary
+colors.
+*/
+
+var primaryColors = [
+  { color: 'red' },
+  { color: 'yellow' },
+  { color: 'blue' }
+];
+
+/*
+From this array, we want to get all the
+values for the 'color' property into
+another array, so that we end up with:
+['red', 'yellow', 'blue'].
+
+Usually we would use the map helper for
+this, but let's see how we can do it
+with the reduce helper.
+*/
+
+primaryColors.reduce(function(previous, primaryColor) {
+  previous.push(primaryColor.color);
+  return previous;
+}, []);
+
+/*
+Here, since we want to return a new
+array (instead of mutating, like map), our
+initial value is an empty array. Then
+in our accumulator function, we add
+the color object's color value to the
+accumulated array.
+*/
+
+/*
+Let's explore some more practical uses
+of the reduce helper. This time, we'll
+look at some interview questions we can
+practice with using reduce.
+
+A common one is the balanced parenthesis
+problem. In this problem, we are given
+a string of parenthetis, and we have to
+determine if they are balanced.
+*/
+
+function isParenthesisBalanced(string) {
+  var balance = string.split("").reduce(function(previous, current) {
+    if (previous < 0) return previous;
+    else {
+      if (current === "(") return ++previous;
+      if (current === ")") return --previous;
+      return previous;
+    }
+  }, 0);
+  return balance === 0;
+}
+
+/*
+Here we use the stack approach where
+we increment a counter by 1 if we
+see a "(" and decrement otherwise.
+We also have to account for the case
+where we are trying to decrement
+a negative counter (putting a ")"
+when there were no previous "(" to
+balance it). For that case, the string
+is automatically not balanced.
+*/
+
+isParenthesisBalanced(")(");
+isParenthesisBalanced("((()))");
