@@ -176,3 +176,47 @@ var admin = users.find(function(user) {
 });
 
 admin;
+
+/*
+This is a simple example in which
+we have a list of accounts and we
+want to find one with a balance of
+12.
+*/
+var accounts = [
+  { balance: -10 },
+  { balance: 12 },
+  { balance: 0 }
+];
+
+var account = accounts.find(function(account) {
+	return account.balance === 12;
+});
+
+account;
+
+/*
+This is a more challenging example, but
+very useful! Here, we have to write our
+own helper function, where we are given
+an array, and some criteria. The criteria
+is an object with key-value pairs that
+we are looking for in our target object.
+Then we use the criteria on the array
+using the find helper function, to
+return the matching element.
+*/
+
+function findWhere(array, criteria) {
+  var key = Object.keys(criteria)[0];
+  return array.find(function(element) {
+		return element[key] === criteria[key];
+  });
+}
+
+var ladders = [
+  { id: 1, height: 20 },
+  { id: 3, height: 35 }
+];
+
+findWhere(ladders, { height: 20 });
