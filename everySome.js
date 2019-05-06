@@ -214,3 +214,44 @@ if (formIsValid) {
 } else {
   // show an error message.
 }
+
+/*
+Let's look at a few examples of every
+and some in action. In this example, we
+have an array of users, and we want to
+know if every user has submitted a
+request form. We can use the every
+helper for this task.
+*/
+
+var users = [
+  { id: 21, hasSubmitted: true },
+  { id: 62, hasSubmitted: false },
+  { id: 4, hasSubmitted: true }
+];
+
+var hasSubmitted = users.every(function(user) {
+	return user.hasSubmitted;
+});
+
+hasSubmitted;
+
+/*
+In this example, we have an array of
+network requests. We want to know if
+any of the requests have a status of
+'pending.' For this, we can use the
+some helper.
+*/
+
+var requests = [
+  { url: '/photos', status: 'complete' },
+  { url: '/albums', status: 'pending' },
+  { url: '/users', status: 'failed' }
+];
+
+var inProgress = requests.some(function(request) {
+	return request.status === 'pending';
+});
+
+inProgress;
