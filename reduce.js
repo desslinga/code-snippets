@@ -126,3 +126,68 @@ is automatically not balanced.
 
 isParenthesisBalanced(")(");
 isParenthesisBalanced("((()))");
+
+/*
+Let's look at more examples to get
+even more familiar with reduce. In our
+first example, we are given an array
+of trips, and we want to take a sum
+of the distance travelled for all
+the trips.
+*/
+
+var trips = [
+  { distance: 34 },
+  { distance: 12 } ,
+  { distance: 1 }
+];
+
+var totalDistance = trips.reduce(function(previous, trip) {
+	return previous + trip.distance;
+}, 0);
+
+totalDistance;
+
+/*
+In this next example, we are given an
+array of desks, each with a type. We
+want to take a tally of each type of
+desk, into an object.
+*/
+
+var desks = [
+  { type: 'sitting' },
+  { type: 'standing' },
+  { type: 'sitting' },
+  { type: 'sitting' },
+  { type: 'standing' }
+];
+
+/*
+We take the previous tally object and
+add to the tally of the current desk.
+*/
+
+var deskTypes = desks.reduce(function(previous, desk) {
+	previous[desk.type]++;
+  return previous;
+}, { sitting: 0, standing: 0 });
+
+/*
+In this last example, we are given an
+array, and want to take only the unique
+elements (remove duplicates). Our
+approach is to check if the accmulated
+array already contains the current
+element, and to only add it if it isn't
+in the array yet.
+*/
+function unique(array) {
+  return array.reduce(function(previous, element) {
+  	if (!previous.includes(element)) previous.push(element);
+    return previous;
+  }, []);
+}
+
+unique([1, 1, 2, 2, 3, 4]);
+unique(['hello', 'hello', 'no']);
