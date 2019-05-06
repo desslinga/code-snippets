@@ -140,17 +140,77 @@ var names = [
 ];
 
 /*
-Not every name has at least 4
-letters...
+Not every name has at least 4 letters.
 */
 names.every(function(name) {
 	return name.length >= 4;
 });
 
 /*
-... But some names have at least
-4 letters.
+... But some names have at least 4
+letters.
 */
 names.some(function(name) {
 	return name.length >= 4;
 });
+
+/*
+As with other helpers, let's ask what
+are the practical uses of the every,
+and some helpers?
+
+Let's say we have a form with username
+and password fields (a login form).
+Let's think about how we might validate
+such a form.
+
+First, we will create a Field class.
+*/
+
+function Field(value) {
+	this.value = value;
+}
+
+/*
+Now of course we can have many other
+fields, like birthdate, age, name,
+address, and what not. Our question is:
+how do we easily validate this form?
+
+Let's create a validate function on
+our Field prototype which returns if
+the Field's value has length > 0.
+*/
+
+Field.prototype.validate = function() {
+	return this.value.length > 0;
+}
+
+var username = new Field("2cool");
+var password = new Field("password");
+var birthdate = new Field("10/10/2010");
+
+username.validate() && password.validate();
+
+/*
+Let's think... how can we validate
+(using the Form validate function) every
+field in our form, to check if our
+entire form is valid? We can use the
+every helper!
+
+We'll create an array of all our fields,
+then use every to check that validate()
+returns true for all fields.
+*/
+
+var fields = [username, password, birthdate];
+var formIsValid = fields.every(function(field) {
+	return field.validate();
+});
+
+if (formIsValid) {
+  // allow user to submit form!
+} else {
+  // show an error message.
+}
