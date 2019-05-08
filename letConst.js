@@ -1,0 +1,71 @@
+/*
+Here we're gonna be talking about variable
+declarations: let and const. First, let's
+talk about some background on the inspiration
+behind ES6 improvements.
+
+It can be said that all new ES6 features
+were implemented for one of two reasons.
+
+The first: features that allow us to write
+less code (read: syntactic sugar).
+
+The second: features that actually bring
+new functionality. This is what the new
+const and let features fall into.
+*/
+
+var color = 'red';
+color;
+
+/*
+In ES5, we used var to declare variables.
+But in ES6, we won't ever be using them
+anymore! Let's introduce const and let.
+
+const is the variable keyword we use to
+declare a constant (a value that will not
+change). Conversely, let is the variable
+keyword to declare a variable (a value
+that is expected to change later).
+*/
+
+/*
+Let's do an example, of an employee
+working at some company.
+*/
+
+// var name = 'Jane';
+// var title = 'Software Engineer';
+// var hourlyWage = 40;
+
+/*
+The above is how we would declare our
+variables with ES5. Let's approach this
+with ES6. For each variable, we will ask,
+do we expect this value to change over
+time?
+*/
+
+const name = 'Jane';
+let title = 'Software Engineer';
+let hourlyWage = 40;
+
+/*
+We expect the name to never change, but
+the title and hourly wage to possibly
+change in the future.
+
+With let, we can reassign the value of
+that variable.
+*/
+
+title = 'Senior Software Engineer';
+hourlyWage = 45;
+
+/*
+But with const, we are given an error if
+we try to reassign that constant.
+
+name = 'Janet' // TypeError: Assignment to constant variable.
+*/
