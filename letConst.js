@@ -113,3 +113,37 @@ function countRefactored(targetString) {
 }
 
 countRefactored('hellothere');
+
+/*
+Here are some examples. Say we want to
+create a profile... which a name, age,
+and date of birth. Let's declare variables
+using the appropriate variable type to
+dictate whether they are are variables
+or constants.
+*/
+
+const name = 'fides';
+let age = 21;
+const dateOfBirth = '1997-12-01';
+
+/*
+Here is a more complicated example. Here
+we have a function that uses var to declare
+variables. Let's refactor it to use let
+and const.
+*/
+
+const statuses = [
+  { code: 'OK', response: 'Request successful' },
+  { code: 'FAILED', response: 'There was an error with your request' },
+  { code: 'PENDING', response: 'Your reqeust is still pending' }
+];
+let message = '';
+const currentCode = 'OK';
+
+for (let i = 0; i < statuses.length; i++) {
+  if (statuses[i].code === currentCode) {
+    message = statuses[i].response;
+  }
+}
