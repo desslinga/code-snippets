@@ -70,3 +70,31 @@ only one variable...
 
 `${some_variable}`
 */
+
+/*
+Let's try some examples with template
+strings!
+
+Here we have a function doubleMessage
+that, when given a number, displays a
+message with that number doubled.
+*/
+
+function doubleMessage(number) {
+	return `Your number doubled is ${2 * number}`;
+}
+
+doubleMessage(12);
+doubleMessage(10);
+
+/*
+This next function takes a first and
+last name, then displays them with a
+space in between.
+*/
+
+function fullName(firstName, lastName) {
+	return `${firstName} ${lastName}`;
+}
+
+fullName("Fides", "Linga");
