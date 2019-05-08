@@ -35,3 +35,38 @@ function getMessage() {
 }
 
 getMessage();
+
+/*
+Let's explore an example of when we would
+use template strings. In Instagram, someone
+figured out a way to programmatically post
+pictures on the platform using a PHP script.
+
+Here is a snippet of it in PHP:
+$data = '{"device_id":"'.$device_id.'","guid":"'.$guid.'","username":"'.$username.'",'"}';
+
+Let's turn it into equivalent JavaScript!
+*/
+
+const device_id = 4;
+const guid = 20;
+const username = "hello";
+
+const data = '{"device_id":"' + device_id + '","guid":"' + guid +  '","username":"' + username + '","}';
+data;
+
+/*
+Now let's refactor this using template
+strings.
+*/
+
+const dataTemplate = `{"device_id":"${device_id}","guid":"${guid}","username":"${username}","}`;
+dataTemplate;
+
+/*
+One thing to be aware of: you don't need
+a template string when the it contains
+only one variable...
+
+`${some_variable}`
+*/
