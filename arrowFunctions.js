@@ -81,3 +81,41 @@ This is much shorter than using the function
 keyword!
 */
 numbers.map(number => number * 2);
+
+/*
+When should we use arrow functions? Are there
+any situations when we should not use them?
+Let's do an example.
+
+Here with a team object that has a list of
+members, a team name, and a summary function
+which returns a list of messages for each
+member in the team.
+*/
+
+const team = {
+	members: ['Jane', 'Bill'],
+  teamName: 'Super Squad',
+  teamSummary: function() {
+    /*
+    When using regular function expressions
+    here, we lose the reference to 'this'
+    inside the map callback, because the
+    callback is being called elsewhere (in
+    the 'map' source code). To bind the
+    value of 'this' to team, we can use 
+    arrow functions.
+
+    Arrow functions uses lexical environment
+    to determine the value of this. This
+    means that the value of 'this' refers
+    to the value of 'this' in the immediate
+    surrounding scope. In this case, 'this'
+    is team.
+    */
+  	return this.members.map(member =>
+       `${member} is on team ${this.teamName}`);
+  }
+};
+
+team.teamSummary();
