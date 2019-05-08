@@ -103,7 +103,7 @@ const team = {
     inside the map callback, because the
     callback is being called elsewhere (in
     the 'map' source code). To bind the
-    value of 'this' to team, we can use 
+    value of 'this' to team, we can use
     arrow functions.
 
     Arrow functions uses lexical environment
@@ -119,3 +119,28 @@ const team = {
 };
 
 team.teamSummary();
+
+/*
+There are cases where we can't use arrow
+functions. For the getName() function, we
+get an error if we try to turn the function
+into an arrow function!
+
+This is because the arrow function attempts
+to bind 'this' to the immediate surrounding
+scope. But 'this' in the immediate surrounding
+scope is undefined!
+*/
+const profile = {
+  name: 'Alex',
+  /*
+  The following returns an error:
+
+  getName: () => this.name
+  */
+  getName: function(){
+  	return this.name;
+  }
+};
+
+profile.getName();
