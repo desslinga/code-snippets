@@ -67,5 +67,49 @@ hourlyWage = 45;
 But with const, we are given an error if
 we try to reassign that constant.
 
-name = 'Janet' // TypeError: Assignment to constant variable.
+name = 'Janet'
+// TypeError: Assignment to constant variable.
 */
+
+/*
+Once again, with ES6 and introducing
+let and const, we will never expect to
+use var again. Now let's talk about the
+rationale about it.
+
+Let's look at some practical example.
+Here is a function that counts the number
+of vowels in a given string.
+*/
+
+function count(targetString) {
+	var characters = ['a', 'e', 'i', 'o', 'u'];
+  var number = 0;
+  for (var i = 0; i < targetString.length; i++) {
+  	if (characters.includes(targetString[i])) {
+    	number++;
+    }
+  }
+  return number;
+}
+
+count('hellothere');
+
+/*
+Now let's refactor it. First, we'll be
+targetting the variable declarations.
+Just by changing the var declarations to
+let and const, the code becomes much easier
+to understand... because we know which
+values are going to change.
+*/
+
+function countRefactored(targetString) {
+	const characters = ['a', 'e', 'i', 'o', 'u'];
+  let number = 0;
+  return targetString.split('').reduce(function(previous, letter) {
+  	if (characters.includes(letter)) ++previous;
+  }, 0);
+}
+
+countRefactored('hellothere');
