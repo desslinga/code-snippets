@@ -31,7 +31,7 @@ function createBookShop(inventory) {
 
     Instead of:
     inventoryValue: function() { ... }
-	
+
   	We have:
     inventoryValue() { ... }
     */
@@ -66,3 +66,33 @@ const inventory = [
 const bookShop = createBookShop(inventory);
 bookShop.inventoryValue();
 bookShop.priceForTitle('Harry Potter');
+
+/*
+Now let's look at a more practical example.
+Let's say that we're gonna use JQuery to send
+some HTTP requests. We'll have a function
+that is recieving some data and then creates
+a POST request.
+*/
+
+function saveFile(url, data) {
+  /*
+  Notice the repetition with the key-value
+  pairs of url, and data. With enhanced
+  object literals, we can reduce this
+  duplication.
+
+  $.ajax({ url: url, data: data, method: 'POST'});
+  */
+	$.ajax({ url, data, method: 'POST'});
+  /*
+  Much better! This is something that will
+  come up often when creating these requests,
+  and definitely a good use of enhanced
+  object literals.
+  */
+}
+
+const url = 'http://fileupload.com';
+const data = { color: 'red' };
+saveFile(url, data);
