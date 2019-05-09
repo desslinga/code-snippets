@@ -96,3 +96,55 @@ function saveFile(url, data) {
 const url = 'http://fileupload.com';
 const data = { color: 'red' };
 saveFile(url, data);
+
+/*
+Let's cover a few more examples. Here we are
+creating an object of colours. Since the
+key-value pairs have the same name, we write
+them only once.
+*/
+
+const red = '#ff0000';
+const blue = '#0000ff';
+
+const COLORS = { red, blue };
+
+/*
+Here we have a props object containing fields
+for a form.
+*/
+
+const fields = [
+  'firstName',
+  'lastName',
+  'phoneNumber'
+];
+
+const props = { fields };
+
+/*
+Here we have a function that returns an object.
+*/
+
+const canvasDimensions = function(width, initialHeight) {
+  const height = initialHeight * 9 /16;
+  return { width, height };
+}
+
+/*
+Here we have a Car object that has methods
+and properties. We can create it using enhanced
+object literal notation.
+*/
+
+const color = 'red';
+
+const Car = {
+  color,
+  drive() {
+    return 'Vroom!';
+  },
+  getColor() {
+    return this.color;
+  }
+};
