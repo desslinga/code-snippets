@@ -42,22 +42,22 @@ makeAjaxRequest('google.com', 'POST');
 
 /*
 If we want to provide no value for some
-parameter, and not have it overriden by
-some default value, then we pass in 'null'
-as the argument.
+parameter, and not have it overriden by some
+default value, then we pass in 'null' as the
+argument.
 */
 
 makeAjaxRequest('google.com', null);
 
 /*
-Let's do a more complicated example, where
-we have a function that returns a new User.
-A User has an id property, which the function
-must generate itself, and randomly. How do
-we do this?
+Let's do a more complicated example, where we
+have a function that returns a new User. A
+User has an id property, which the function
+must generate itself, and randomly. How do we
+do this?
 
 We create a function that returns a randomly
-generate number.
+generated number.
 */
 
 function generateId() {
@@ -65,8 +65,8 @@ function generateId() {
 }
 
 /*
-We pass in the random number generator as
-the default parameter. This is the User
+We pass in the random number generator as the
+default parameter. This is the User
 constructor.
 */
 
@@ -75,8 +75,8 @@ function User(id = generateId()) {
 }
 
 /*
-This function creates an Admin User, given
-an already existing user.
+This function creates an Admin User, given an
+already existing user.
 */
 
 function createAdminUser(user) {
@@ -86,8 +86,8 @@ function createAdminUser(user) {
 
 /*
 Because we are making use of default
-arguments for generating IDs, our code
-for creating Users is much cleaner.
+arguments for generating IDs, our code for
+creating Users is much cleaner.
 */
 createAdminUser(new User());
 
@@ -97,3 +97,54 @@ mind, we can specify it and override the
 randomly generated one.
 */
 new User(1);
+
+/*
+Let's take a look at another example. Here,
+we have a function that takes the sum of two
+numbers. We are checking for undefined
+arguments, and reassigning those variables = 0.
+It looks messy, so let's fix this.
+*/
+
+function sumOld(a, b) {
+  if (a === undefined) {
+    a = 0;
+  }
+  if (b === undefined) {
+    b = 0;
+  }
+  return a + b;
+}
+
+/*
+With default arguments, we omit the if
+statements that check for undefined arguments.
+Our revised approach looks much cleaner.
+*/
+
+function sum(a = 0, b = 0) {
+  return a + b;
+}
+
+/*
+Here's another example that we'll want to
+refactor. It is a function that adds 10px
+to some style property value in CSS.
+*/
+
+function addOffsetOld(style) {
+  if (!style) {
+    style = {};
+  }
+  style.offset = '10px';
+  return style;
+}
+
+/*
+Our refactored version:
+*/
+
+function addOffset(style = {}) {
+  style.offset = '10px';
+  return style;
+}
