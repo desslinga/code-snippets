@@ -119,3 +119,50 @@ function validateShoppingList(...items) {
 }
 
 validateShoppingList('orange', 'bread', 'egg');
+
+/*
+Let's look at a more practical example of
+the rest and spread operators. Let's say
+we want to create a JavaScript library
+consisting of mathematical functions.
+*/
+
+const MathLibrary = {
+  /*
+  We may initially want to implement
+  the product function with just two
+  operands.
+
+  calculateProduct(a, b) {
+  	return a * b
+  }
+
+  ...but that's misleading. Some users
+  may complain that this function should
+  be called 'multiply' instead. How do
+  we implement this change? Some users
+  may already be relying on the
+  calculateProduct function, so we can't
+  just rename it. What we can do instead
+  is create another function 'multiply'
+  and then change calculateProduct so
+  that it defers the multiplying logic
+  to 'multiply'.
+  */
+
+  multiply(a, b) {
+  	return a * b
+  },
+
+  /*
+  This way, we have backwards
+  compatibility, while minimizing the
+  code we write, because we don't have to
+  write all the arguments again!
+  */
+	calculateProduct(...numbers) {
+    return this.multiply(...numbers);
+  }
+}
+
+MathLibrary.calculateProduct(2, 3);
