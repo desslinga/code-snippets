@@ -218,3 +218,64 @@ location for Google.
 const { locations: [ locationOne ] } = Google;
 locations; // ReferenceError: locations is not defined
 locationOne; // [ "Mountain View" ]
+
+/*
+Let's cover a more practical example of
+destructuring. Say that we have a signup
+function that takes in user properties and
+then creates a new user out of them. We
+can accept the different properties as
+separate arguments, but this can get very
+confusing and hard to maintain (what if
+we want to add more properties? what if
+we don't remember the order that we provide
+the arguments?). Developers would need to
+memorize the order that we need to provide
+the arguments...
+
+function signup(
+  username,
+  password,
+  email,
+  dateOfBirth
+) { // create new user}
+
+signup(
+  'myname',
+  'mypassword',
+  'myemail@example.com',
+  '12/01/1997'
+);
+
+So this is not really good style. A better
+alternative is to use a object that contains
+all the properties of a user. And then in our
+signup function, we can destructure the
+properties in the user object to be provided.
+Plus, the order that we destructure the
+different properties doesn't matter!
+*/
+
+function signup({
+  password,
+  username,
+  email,
+  dateOfBirth
+}) {
+  // create new user
+}
+
+const newUser = {
+  username: 'myname',
+  password: 'mypassword',
+  email: 'myemail@example.com',
+  dateOfBirth: '12/01/1997'
+};
+
+/*
+Now we don't really need to remember the
+order that we need to pass in the arguments.
+We simply ensure that each value is mapped
+to the correct keys.
+*/
+signup(newUser);
