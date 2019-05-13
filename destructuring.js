@@ -344,3 +344,81 @@ points.map(([x, y]) => {
   */
   return { x, y };
 });
+
+/*
+We're gonna be covering a few more examples
+of refactoring to use destructuring.
+
+Here we have an isEngineerOld function that
+is taking a profile object and then validating
+it's properties. We'll refactor using
+destructuring and other ES6 features to make
+it more legible.
+*/
+
+const profile = {
+  title: 'Engineer',
+  department: 'Engineering'
+};
+
+function isEngineerOld(profile) {
+  var title = profile.title;
+  var department = profile.department;
+  return (title === 'Engineer'
+    && department === 'Engineering');
+}
+
+/*
+We destructure the profile properties at
+the function definition.
+*/
+
+function isEngineer({ title, department }) {
+  return (title === 'Engineer'
+    && department === 'Engineering');
+}
+
+/*
+Let's do an example with array destructuring.
+Let's say we have an array of classes, and each
+class has properties that are presented in an
+array.
+*/
+
+const classes = [
+  [ 'Chemistry', '9AM', 'Mr. Darnick' ],
+  [ 'Physics', '10:15AM', 'Mrs. Lithun'],
+  [ 'Math', '11:30AM', 'Mrs. Vitalis' ]
+];
+
+/*
+For this example, we want to convert each
+class array into a class object, where each
+object has properties 'subject', 'time', and
+'teacher'. Let's convert the arrays using
+array destructuring.
+*/
+
+const classesAsObject = classes.map(([
+  subject, time, teacher
+]) => {
+  return { subject, time, teacher };
+});
+
+classesAsObject;
+
+/*
+Now our final example. This one is hard...
+we want to use array destructuring, recursion,
+and the rest/spread operators to create a
+function 'double' which takes an array and
+returns a new array with its elements multiplied
+by two. We can't use array helpers!
+*/
+
+const numbers = [1, 2, 3];
+
+function double([head, ...tail]) {
+  if (!head) return [];
+  return [head * 2, ...double(tail)];
+}
