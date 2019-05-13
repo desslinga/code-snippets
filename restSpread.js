@@ -121,33 +121,31 @@ function validateShoppingList(...items) {
 validateShoppingList('orange', 'bread', 'egg');
 
 /*
-Let's look at a more practical example of
-the rest and spread operators. Let's say
-we want to create a JavaScript library
-consisting of mathematical functions.
+Let's look at a more practical example of the
+rest and spread operators. Let's say we want
+to create a JavaScript library consisting of
+mathematical functions.
 */
 
 const MathLibrary = {
   /*
-  We may initially want to implement
-  the product function with just two
-  operands.
+  We may initially want to implement the
+  product function with just two operands.
 
   calculateProduct(a, b) {
   	return a * b
   }
 
-  ...but that's misleading. Some users
-  may complain that this function should
-  be called 'multiply' instead. How do
-  we implement this change? Some users
-  may already be relying on the
-  calculateProduct function, so we can't
-  just rename it. What we can do instead
-  is create another function 'multiply'
-  and then change calculateProduct so
-  that it defers the multiplying logic
-  to 'multiply'.
+  ...but that's misleading. Some users may
+  complain that this function should be
+  called 'multiply' instead. How do we
+  implement this change? Some users may
+  already be relying on the calculateProduct
+  function, so we can't just rename it. What
+  we can do instead is create another
+  function 'multiply' and then change
+  calculateProduct so that it defers the
+  multiplying logic to 'multiply'.
   */
 
   multiply(a, b) {
@@ -155,10 +153,10 @@ const MathLibrary = {
   },
 
   /*
-  This way, we have backwards
-  compatibility, while minimizing the
-  code we write, because we don't have to
-  write all the arguments again!
+  This way, we have backwards compatibility,
+  while minimizing the code we write, because
+  we don't have to write all the arguments
+  again!
   */
 	calculateProduct(...numbers) {
     return this.multiply(...numbers);
@@ -166,3 +164,71 @@ const MathLibrary = {
 }
 
 MathLibrary.calculateProduct(2, 3);
+
+/*
+Let's go over some more examples to get some
+practice with the rest and spread operators.
+In the example below, we are going to
+implement a 'product' function that should
+take as many numbers as the users want to
+provide, and then calculate the product of
+all of them. We use the spread operator to
+recieve all the arguments, and then the
+reduce helper.
+*/
+
+function product(...numbers) {
+  return numbers.reduce(function(acc, number) {
+    return acc * number;
+  }, 1);
+}
+
+product(2, 3, 4);
+
+/*
+Here, we're going to create a function 'join'
+which takes in two arrays and concatenates
+them. We know that we can use the 'concat'
+array helper for this, but let's try to do
+the same thing using the spread operator.
+*/
+
+function join(array1, array2) {
+	/*
+  Here is the implementation using concat.
+
+  return array.concat(array2)
+
+  But here's how it should work using the
+  spread operator...
+  */
+  return [...array1, ...array2];
+}
+
+join([1, 2, 3], [2, 4, 6]);
+
+/*
+In this last example, we're implementing an
+'unshift' function which takes an array, and
+then some comma separated arguments, like
+so:
+
+([1, 2, 3, ...], a, b, c, ...)
+
+and then creates a new array where the comma
+separated elements are placed in the
+beginning of the array, followed by the
+elements in the actual given array.
+
+Just to recap, the rest operator takes comma
+separated values and then puts them in an
+array! So when you want to access them as
+comma separated values again, we have to use
+the spread operator.
+*/
+
+function unshift(array, ...rest) {
+  return [...rest, ...array];
+}
+
+unshift([4, 5, 6], 1, 2, 3);
