@@ -19,6 +19,7 @@ Here we've defined a Car constructor that
 takes in some options to customize the
 Car object.
 */
+
 function Car(options) {
   this.title = options.title;
 }
@@ -30,6 +31,7 @@ instances that inherit from Car.prototype
 is able to access any of its properties
 and methods.
 */
+
 Car.prototype.drive = function() {
   return 'vroom';
 }
@@ -42,6 +44,44 @@ prototype.
 const car = new Car({ title: 'Focus '});
 car.drive(); // vroom
 car;
+
+/*
+With JavaScript objects, we can also create
+child objects. For object Car, we can create
+another Car type of Toyota, which has it's
+own constructor.
+*/
+
+function Toyota(options) {
+  Car.call(this, options);
+  this.color = options.color;
+}
+
+/*
+This is how we make Toyota inherit from the
+Car prototype, but use the Toyota constructor.
+*/
+
+Toyota.prototype = Object.create(Car.prototype);
+Toyota.prototype.constructor = Toyota;
+
+/*
+As per usual, we can also add methods or
+properties to the Toyota prototype by adding
+them to Toyota.prototype.
+*/
+
+Toyota.prototype.honk = function() {
+  return 'beep';
+}
+
+const toyota = new Toyota({
+  color: 'red',
+  title: 'Daily Driver'
+});
+toyota;
+toyota.drive(); // vroom
+toyota.honk(); // beep
 
 /*
 One of the goals of introducing classes is
