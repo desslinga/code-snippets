@@ -279,3 +279,68 @@ We simply ensure that each value is mapped
 to the correct keys.
 */
 signup(newUser);
+
+/*
+So now we've seen a use case of why we would
+destructure out of objects. Let's see an
+example of why we would do the same for
+arrays.
+
+The more obvious use case is accessing the
+first element of an array. It is something
+that is done frequently, and made more clean
+when destructuring.
+
+const [ head ] = [1, 2, 3];
+head; // 1
+
+Now let's look at other examples. Let's say
+we have an array of coordinates, which are
+represented by an array of two elements. We
+want to create a chart out of it.
+*/
+
+const points = [
+  [4, 5],
+  [10, 1],
+  [0, 40]
+];
+
+/*
+But we have a problem. Our charting library
+wants to take in the points as an array of
+objects like so:
+*/
+
+[
+  { x: 4, y: 5 },
+  { x: 10, y: 1 },
+  { x: 0, y: 40 }
+];
+
+/*
+We have to somehow convert our array of
+arrays into an array of objects. How would
+we do this with destructuring?
+*/
+
+/*
+Note that we surround the ([x, y])
+destructuring with parenthesis because we
+are not accepting just a simple argument.
+*/
+points.map(([x, y]) => {
+  /*
+  We're also using the return keyword to
+  return our object. We can't omit the
+  curly braces like so:
+
+  points.map(([x, y]) => { x, y });
+
+  because when using arrow functions, { }
+  dictates another block. Also, we are
+  using enhanced object literals to create
+  and return our coordinate object.
+  */
+  return { x, y };
+});
