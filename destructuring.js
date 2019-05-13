@@ -115,32 +115,33 @@ fileSummary(savedFile, { color: 'red' });
 /*
 We can also destructure out of arrays!
 Let's say we have an array of different
-tech companies. As with objects, when we
-destructure from arrays, we're plucking
-off different elements.
+fruits. As with objects, when we destructure
+from arrays, we're plucking off different
+elements.
 */
 
-const companies = [
-  'Google',
-  'Facebook',
-  'Uber'
+const fruits = [
+  'Apple',
+  'Blueberry',
+  'Pear'
 ];
 
 /*
 How it works is we are pulling out
 elements in the order that they appear
 in the array. We use square brackets
-instead of curly brackets. So name1 will
-be Google, name2 will be Facebook, and
-so on. We can try to access as many as we
-want in the array. If we try to access
-elements that don't exist (out of bounds),
-then those variables will return undefined.
+instead of curly brackets. So fruitOne
+will be Apple, fruitTwo will be
+Blueberry, and so on. We can try to
+access as many as we want in the array.
+If we try to access elements that don't
+exist (out of bounds), then those variables
+will return undefined.
 */
 
-const [ name1, name2 ] = companies;
-name1; // Google
-name2; // Facebook
+const [ fruitOne, fruitTwo ] = fruits;
+fruitOne; // Apple
+fruitTwo; // Blueberry
 
 /*
 If we want to get the first element,
@@ -151,5 +152,69 @@ elements in an array.
 */
 
 const [ head, ...tail ] = companies;
-head; // Google
-tail; // [ Facebook, Uber ]
+head; // Apple
+tail; // [ "Blueberry", "Pear" ]
+
+/*
+Now that we know how to destructure out
+of both arrays and objects, let's see
+how we can combine them. Here, we're
+gonna create an array of objects, as
+usual.
+*/
+
+const companies = [
+  { name: 'Google', location: 'Mountain View' },
+  { name: 'Facebook', location: 'Menlo Park' },
+  { name: 'Uber', location: 'San Francisco' }
+];
+
+/*
+Now what if we wanted to know Google's
+location? In ES5, we would've written
+something like:
+*/
+
+var googleLocation = companies[0].location;
+googleLocation;
+
+/*
+And this still works, but let's see how
+we can refactor this, because we can use
+the same variable name 'location' to
+access a property called 'location'.
+*/
+
+const [{ location }] = companies;
+location;
+
+/*
+Much better and cleaner! This is how we
+extract the location property from the
+first object. It is equivalent to the
+previous line. companies[0].location,
+but more elegant.
+
+Let's expand our example a little more.
+Let's say google has multiple locations,
+so we create an object for it, and give it
+an array property 'locations' which lists
+all its different locations.
+*/
+
+const Google = {
+  locations: [
+    'Mountain View',
+    'New York',
+    'London'
+  ]
+}
+
+/*
+Let's say we want to extract the first
+location for Google.
+*/
+
+const { locations: [ locationOne ] } = Google;
+locations; // ReferenceError: locations is not defined
+locationOne; // [ "Mountain View" ]
