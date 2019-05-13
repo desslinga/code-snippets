@@ -89,4 +89,47 @@ not having to deal with the prototype
 object anymore, because it can be confusing
 to work with, and thus easy to make errors
 with it.
+
+So let's try refactoring our code into ES6
+below. The idea with the class feature is
+that we can bypass having to use the prototype
+object.
 */
+
+/*
+We create a new class by declaring it with the
+class keyword.
+*/
+class Car {
+  /*
+  This is the constructor function, which may
+  be familiar to you, because it is also used
+  in other programming languages. Think of it
+  as an init function for this class.
+
+  If there are any arguments we want to pass
+  with the 'new' keyword, then those arguments
+  will be recieved by the constructor.
+  */
+  constructor({ title }) {
+    this.title = title;
+  }
+  /*
+  Here we're adding a method to class Car,
+  which can be used by any car instances.
+  */
+  drive() {
+    return 'vroom'
+  }
+}
+
+/*
+Here we're creating a new instance of class
+Car. Once again, what this does is create a
+new object that inherits from the Car class.
+It can use call properties, and use methods
+from the Car class.
+*/
+const car = new Car({ title: 'Toyota' });
+car; // { "title" : "Toyota" }
+car.drive(); // vroom
