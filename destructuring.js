@@ -111,3 +111,45 @@ function fileSummary(
 }
 
 fileSummary(savedFile, { color: 'red' });
+
+/*
+We can also destructure out of arrays!
+Let's say we have an array of different
+tech companies. As with objects, when we
+destructure from arrays, we're plucking
+off different elements.
+*/
+
+const companies = [
+  'Google',
+  'Facebook',
+  'Uber'
+];
+
+/*
+How it works is we are pulling out
+elements in the order that they appear
+in the array. We use square brackets
+instead of curly brackets. So name1 will
+be Google, name2 will be Facebook, and
+so on. We can try to access as many as we
+want in the array. If we try to access
+elements that don't exist (out of bounds),
+then those variables will return undefined.
+*/
+
+const [ name1, name2 ] = companies;
+name1; // Google
+name2; // Facebook
+
+/*
+If we want to get the first element,
+and then an array of the remaining
+(tail) elements, we can use the rest
+operator to gather those remaining
+elements in an array.
+*/
+
+const [ head, ...tail ] = companies;
+head; // Google
+tail; // [ Facebook, Uber ]
