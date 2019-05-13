@@ -104,7 +104,7 @@ Let's cover another example. Let's say we
 have a function whose job is to validate a
 given shopping list. The number of items in
 the shopping list is not known, so we use
-the spread operator.
+the rest operator.
 */
 
 function validateShoppingList(...items) {

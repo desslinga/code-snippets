@@ -69,3 +69,45 @@ property that doesn't exist?
 As above, we'll get undefined when accessing
 that new variable.
 */
+
+/*
+What more can we do with destructuring?
+Let's take a look with an example. Here,
+we are writing a function that accepts a
+single object (savedFile) as an argument.
+*/
+
+var savedFile = {
+  extension: 'jpg',
+  name: 'repost',
+  size: 14040
+};
+
+function fileSummary(
+  { name, extension, size },
+  { color }
+) {
+  /*
+  With the following approach, not that
+  we're accessing the file object
+  repeatedly: file.name, file.extension,
+  file.size...
+
+  return `The file ${file.name}.${file.extension}
+    is of size ${file.size}`;
+
+  To solve this, we can destructure the
+  properties of file in the parameters
+  of the function definition. Then we can
+  simply reference those properties by
+  name.
+
+  If we are passing in multiple objects,
+  then we perform destructuring multiple
+  times.
+  */
+  return `The file ${name}.${extension}
+    is of size ${size}, and color ${color}`;
+}
+
+fileSummary(savedFile, { color: 'red' });
