@@ -227,3 +227,36 @@ class MyComponent extends Component {
 
   }
 }
+
+/*
+Let's go over a few more examples. Below
+we have a Monster class, which is supposed
+to be initialized with an options object
+with a name property. It also has to be
+intialized with a default health of 100.
+*/
+
+class Monster {
+  constructor({ name }) {
+    this.name = name;
+    this.health = 100;
+  }
+}
+
+/*
+For our next task, we are to create a Snake
+class which is a type of Monster. The Snake
+should have a bite() method, which takes
+another Snake instance as an argument. That
+snake (which has been bitten) will have its
+health decreased by 100.
+*/
+
+class Snake extends Monster {
+  constructor(options) {
+    super(options);
+  }
+  bite(otherSnake) {
+    otherSnake.health -= 10;
+  }
+}
