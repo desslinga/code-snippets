@@ -196,3 +196,34 @@ const toyota = new Toyota({
   title: 'Daily Driver'
 });
 toyota.honk(); // beep
+
+/*
+Of course, the important question to ask at
+this point is: when should we use classes?
+Classes are useful in projects of all scales,
+because it helps keep code modular and
+separated into components. Classes are used
+extensively in frameworks like React, where
+classes designate separate components, which
+are each responsible for one purpose.
+
+In React, we make use of inheritance because
+components share multiple properties. It
+also helps with reducing code reuse.
+
+Each component in react inherits from the
+Component class (which is provided by the
+React library). The Component class dictates
+properties that should be shared by all
+Components.
+*/
+
+class MyComponent extends Component {
+  doSomething() {
+
+  }
+
+  doSomethingElse() {
+
+  }
+}
