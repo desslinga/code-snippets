@@ -48,7 +48,7 @@ car;
 /*
 With JavaScript objects, we can also create
 child objects. For object Car, we can create
-another Car type of Toyota, which has it's
+another Car type of Toyota, which has its
 own constructor.
 */
 
@@ -59,7 +59,8 @@ function Toyota(options) {
 
 /*
 This is how we make Toyota inherit from the
-Car prototype, but use the Toyota constructor.
+Car prototype, but use the Toyota
+constructor.
 */
 
 Toyota.prototype = Object.create(Car.prototype);
@@ -92,24 +93,26 @@ with it.
 
 So let's try refactoring our code into ES6
 below. The idea with the class feature is
-that we can bypass having to use the prototype
-object.
+that we can bypass having to use the
+prototype object.
 */
 
 /*
-We create a new class by declaring it with the
-class keyword.
+We create a new class by declaring it with
+the class keyword.
 */
 class Car {
   /*
-  This is the constructor function, which may
-  be familiar to you, because it is also used
-  in other programming languages. Think of it
-  as an init function for this class.
+  This is the constructor function, which
+  may be familiar to you, because it is
+  also used in other programming languages.
+  Think of it as an init function for this
+  class.
 
-  If there are any arguments we want to pass
-  with the 'new' keyword, then those arguments
-  will be recieved by the constructor.
+  If there are any arguments we want to
+  pass with the 'new' keyword, then those
+  arguments will be recieved by the
+  constructor.
   */
   constructor({ title }) {
     this.title = title;
@@ -117,6 +120,10 @@ class Car {
   /*
   Here we're adding a method to class Car,
   which can be used by any car instances.
+  One thing to note is that you don't need
+  to separate different class methods with
+  a comma "," as how you would do for
+  objects.
   */
   drive() {
     return 'vroom'
@@ -130,6 +137,62 @@ new object that inherits from the Car class.
 It can use call properties, and use methods
 from the Car class.
 */
+
 const car = new Car({ title: 'Toyota' });
 car; // { "title" : "Toyota" }
 car.drive(); // vroom
+
+
+/*
+Now let's see how inheritance works with ES6
+classes. Let's declare our Toyota class. To
+extend from the Car class, we simply declare
+'extends Car' after our class declaration.
+
+What this does is grant the Toyota class
+access to Car's methods, if they're not
+implemented within the Toyota class itself.
+In Toyota class we don't have a drive()
+method, so it will use Car's drive() method
+instead.
+*/
+
+class Toyota extends Car {
+  /*
+  In the constructor, we recieve the options
+  object argument, and then perform some
+  setup.
+  */
+  constructor(options) {
+    /*
+    super() is how we call the constructor
+    of the parent method, which is Car in
+    this case.
+
+    super() acts the same as
+    Car.constructor(), and this applies for
+    all methods in the Toyota class.
+    */
+    super(options);
+    this.color = options.color;
+  }
+  honk() {
+    /*
+    If the Car class also had a honk method
+    that we wanted to use, then we use
+    super(), which would act like Car.honk()
+    */
+    return 'beep';
+  }
+}
+
+/*
+As usual, we are creating a new instance of
+the Toyota class. We are declaring it with a
+color of red.
+*/
+const toyota = new Toyota({
+  color: 'red',
+  title: 'Daily Driver'
+});
+toyota.honk(); // beep

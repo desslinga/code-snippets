@@ -150,7 +150,7 @@ post for the one with some particular
 id, then we extract the id from the
 url, and then use the find helper
 with that id to find the post and
-display it's content.
+display its content.
 */
 
 /*

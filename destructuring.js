@@ -351,7 +351,7 @@ of refactoring to use destructuring.
 
 Here we have an isEngineerOld function that
 is taking a profile object and then validating
-it's properties. We'll refactor using
+its properties. We'll refactor using
 destructuring and other ES6 features to make
 it more legible.
 */
