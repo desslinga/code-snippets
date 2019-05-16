@@ -151,8 +151,60 @@ gen.next('clean clothes');
 // { "value": ["croceries", "laundry"], "done": true }
 // exiting laundry.
 // walking home.
+
 /*
-When we call gen.next with 'groceries',
-then we are going to replace whatever
-we've returned with yield, with 'groceries'.
+When we call gen.next with 'groceries', then
+we are going to replace whatever we've
+returned with yield, with 'groceries'.
+*/
+
+/*
+Now we're going to talk about how generators
+work, and how it ties in with for loops,
+iterators, and the such. For this, Let's
+create a new generator 'colors'.
+*/
+
+function* colors() {
+  yield 'red';
+  yield 'blue';
+  yield 'green';
+}
+
+const gen = colors();
+gen.next();
+// { "value": "red", "done": false }
+gen.next();
+// { "value": "blue", "done": false }
+gen.next();
+// { "value": "green", "done": false }
+gen.next();
+// { "done": true }
+
+/*
+The last return is only { "done": true }
+because is no return statement for this
+generator.
+*/
+
+/*
+Now here's the big reveal with generators...
+They are the mechanism behind for-of loops.
+Notice how we don't have to use .next()
+when accessing the values here, because
+it is already handled in the for-of loop.
+*/
+
+const myColors = [];
+for (let color of colors()) {
+  myColors.push(color);
+}
+
+myColors; // ["red", "blue", "green"]
+
+/*
+Now the good thing about generators is
+that we can make a custom iterator for any
+data structure we want. We just have
+to create a generator function for it!
 */
