@@ -208,3 +208,46 @@ that we can make a custom iterator for any
 data structure we want. We just have
 to create a generator function for it!
 */
+
+/*
+Before continuing on, we'll be doing a
+side-step into practical uses of ES6
+generators. So for this example, we'll be
+creating an object that represents an
+engineering team.
+*/
+
+const engineeringTeam = {
+  size: 3,
+  department: 'Engineering',
+  lead: 'Jill',
+  manager: 'Alex',
+  engineering: 'Dave'
+};
+
+/*
+Let's say we want to write a function that
+would iterate over all the people working
+in the engineering team. Note that we can't
+simply use a for-loop here, because we don't
+care about the size or department properties.
+We only care about the employees. So let's
+write a generator to handle this iteration
+for us.
+
+When we yield each of the team properties,
+then each iteration will return the next
+team member.
+*/
+
+function* teamIterator(team) {
+  yield team.lead;
+  yield team.manager;
+  yield team.engineer;
+}
+
+const names = [];
+for (let name of TeamIterator(engineeringTeam)) {
+  names.push(name);
+}
+// ["Jill", "Alex", "Dave"]
