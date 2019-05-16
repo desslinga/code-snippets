@@ -93,17 +93,38 @@ function* shopping() {
   // walking down the sidewalk (to store).
 
   // enter grocery store with cash.
+
   const stuffFromStore = yield 'cash';
+  /*
+  First call to .next() stops and returns
+  here.
+  */
 
   /*
   When we've yielded a value, it's like
   exiting the generator and returned.
   On the next call to .next(); we
-  continue from where we left off...
+  continue from where we left off. In
+  this case, it will be the next line,
+  where we're picking up stuff from the
+  laundry. Then we'll break from the
+  function again.
   */
 
-  // exit grocery store and go home.
-  return stuffFromStore;
+  const cleanClothes = yield 'laundry';
+  /*
+  Second call to .next() stops and returns
+  here.
+  */
+
+  // exiting laundry.
+
+  // walking home.
+  return [stuffFromStore, cleanClothes];
+  /*
+  Third call to .next() stops and returns
+  here.
+  */
 }
 
 // inside the grocery store
@@ -123,9 +144,13 @@ gen.next();
 // walked up and down aisles...
 // purchase groceries
 gen.next('groceries');
-// { "value": "groceries", "done": true }
+// { "value": "groceries", "done": false }
 // exiting store (with groceries).
-
+// walking to the laundry.
+gen.next('clean clothes');
+// { "value": ["croceries", "laundry"], "done": true }
+// exiting laundry.
+// walking home.
 /*
 When we call gen.next with 'groceries',
 then we are going to replace whatever
