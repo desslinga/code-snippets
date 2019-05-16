@@ -72,3 +72,62 @@ strange, but we'll make it clear later on.
 const gen = numbers();
 gen.next(); // { "done": false }
 gen.next(); // { "done": true }
+
+/*
+We're gonna explain generators with an analogy
+of sorts. Let's take the example of grocery
+shopping. When we enter a grocery store, we
+have some amount of money and (usually) no
+groceries in hand. And when we exit a grocery
+store, we (usually) have less money, but with
+groceries in hand. Notice the distinct
+difference between entering and exiting a
+grocery store.
+
+Let's model this analogy with generators.
+*/
+
+function* shopping() {
+  // outside the grocery store
+
+  // walking down the sidewalk (to store).
+
+  // enter grocery store with cash.
+  const stuffFromStore = yield 'cash';
+
+  /*
+  When we've yielded a value, it's like
+  exiting the generator and returned.
+  On the next call to .next(); we
+  continue from where we left off...
+  */
+
+  // exit grocery store and go home.
+  return stuffFromStore;
+}
+
+// inside the grocery store
+
+/*
+Note that calling the generator function
+with shopping() doesn't actually do anything.
+It is only called when we invoke it with
+shopping.next()
+*/
+
+const gen = shopping();
+// exiting my house.
+gen.next();
+// { "value": "cash", "done": false }
+// walked into the store...
+// walked up and down aisles...
+// purchase groceries
+gen.next('groceries');
+// { "value": "groceries", "done": true }
+// exiting store (with groceries).
+
+/*
+When we call gen.next with 'groceries',
+then we are going to replace whatever
+we've returned with yield, with 'groceries'.
+*/
