@@ -217,7 +217,7 @@ creating an object that represents an
 engineering team.
 */
 
-const engineeringTeam = {
+const engineeringTeamOne = {
   size: 3,
   department: 'Engineering',
   lead: 'Jill',
@@ -247,7 +247,46 @@ function* teamIterator(team) {
 }
 
 const names = [];
-for (let name of TeamIterator(engineeringTeam)) {
+for (let name of TeamIterator(engineeringTeamOne)) {
   names.push(name);
 }
 // ["Jill", "Alex", "Dave"]
+
+/*
+Now we're gonna talking about delegation of
+generators. Let's start with a practical
+example. Extending our engineering team
+example, let's say we have a testing team
+which belongs to the engineering team. Our
+testing team will consist of a lead, and a
+tester.
+*/
+
+const testingTeam = {
+  lead: 'Amanada',
+  tester: 'Bill'
+};
+
+const engineeringTeamTwo = {
+  ...engineeringTeamOne,
+  testingTeam: testingTeam
+};
+
+/*
+Now we want to modify our team iterator so
+that it'll also iterate through the testing
+team. There's two ways to do this. We can
+also yield team.testingTeam.lead and the
+corresponding tester. But is this approach
+scalable? What if we want to iterate through
+just the testing team?
+
+We create a separate generator for the
+testing team. Now how do we combind these
+two generators together?
+*/
+
+function* TestingTeamIterator(team) {
+  yield team.lead;
+  yield team.tester;
+}
