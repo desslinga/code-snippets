@@ -240,16 +240,18 @@ then each iteration will return the next
 team member.
 */
 
-function* teamIterator(team) {
+function* EngineeringTeamIterator(team) {
   yield team.lead;
   yield team.manager;
-  yield team.engineer;
+  yield team.engineering;
 }
 
-const names = [];
-for (let name of TeamIterator(engineeringTeamOne)) {
-  names.push(name);
+const namesOne = [];
+for (let name of EngineeringTeamIterator(engineeringTeamOne)) {
+  namesOne.push(name);
 }
+
+namesOne;
 // ["Jill", "Alex", "Dave"]
 
 /*
@@ -263,26 +265,31 @@ tester.
 */
 
 const testingTeam = {
-  lead: 'Amanada',
+  lead: 'Amanda',
   tester: 'Bill'
 };
 
 const engineeringTeamTwo = {
-  ...engineeringTeamOne,
+  size: 3,
+  department: 'Engineering',
+  lead: 'Jill',
+  manager: 'Alex',
+  engineering: 'Dave',
   testingTeam: testingTeam
 };
 
+engineeringTeamTwo;
 /*
 Now we want to modify our team iterator so
 that it'll also iterate through the testing
-team. There's two ways to do this. We can
-also yield team.testingTeam.lead and the
-corresponding tester. But is this approach
+team as well. There's two ways to do this.
+We can also yield team.testingTeam.lead and
+the corresponding tester. But is this approach
 scalable? What if we want to iterate through
 just the testing team?
 
 We create a separate generator for the
-testing team. Now how do we combind these
+testing team. Now how do we combine these
 two generators together?
 */
 
@@ -290,3 +297,43 @@ function* TestingTeamIterator(team) {
   yield team.lead;
   yield team.tester;
 }
+
+/*
+When we combine these two generators. What
+we want is to be able to *delegate* the next
+iteratations to the testing-team generator,
+when we've finished iterating through the
+main engineering team.
+*/
+
+function* TeamIterator(team) {
+  /*
+  We create variables where we call each of
+  the generators with the corresponding team.
+  */
+  const engineeringTeamIterator = EngineeringTeamIterator(team);
+  const testingTeamIterator = TestingTeamIterator(team.testingTeam);
+  /*
+  Then, in order to yield them in order, when
+  we iterate through the TeamIterator
+  generator, we have use the yield* keyword
+  with the variables we created.
+
+  It seems to work. But why does it work?
+
+  yield* can be thought of as a trap door,
+  that can trick a for loop to iterate
+  through it's generator, and then continue
+  iterating through it's values.
+  */
+  yield* engineeringTeamIterator;
+  yield* testingTeamIterator;
+}
+
+const namesTwo = [];
+for (let name of TeamIterator(engineeringTeamTwo)) {
+  namesTwo.push(name);
+}
+
+namesTwo;
+// ["Jill", "Alex", "Dave", "Amanda", "Bill"]
