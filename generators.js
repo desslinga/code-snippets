@@ -421,3 +421,67 @@ for (let name of engineeringTeamThree) {
 
 namesThree;
 // ["Jill", "Alex", "Dave", "Amanda", "Bill"]
+
+/*
+We might be wondering now... what are the
+practical uses of generators? That's what
+we're gonna cover next. We're gonna figure out
+how we can use generators with recursion!
+
+Recall that trees are a popular data structure,
+consisting of nodes, which can contain multiple
+node children. And so on. Where do we see trees
+in web development? There are many examples,
+particularly forum posts. On Reddit for example,
+comments can have replies, and those replies
+have more replies. We can think of that structure
+as a tree, where each reply is a node which can
+contain more children of its own.
+
+Let's try to create a comment tree object with
+its own symbol iterator, so that we can easily
+iterate through its contents using a for loop.
+*/
+
+class Comment {
+  constructor(content, children) {
+    this.content = content;
+    this.children = children;
+  }
+}
+
+/*
+Here, we're creating a comment tree structure.
+*/
+
+const children = [
+  new Comment('good comment', []),
+  new Comment('bad comment', []),
+  new Comment('meh', [])
+];
+
+const tree = new Comment('Great post!', children);
+
+tree;
+
+/*
+{"content": "Great post!",
+ "children": [
+   {"content": "good comment",
+    "children":[]},
+   {"content":"bad comment",
+    "children":[]},
+   {"content":"meh",
+    "children":[]}]}
+*/
+
+/*
+Now let's think about how we can use the symbol
+generator to iterate through each comment in a
+comment tree. Note that this time, it's a bit
+more complicated because we can't simply use
+yield on each comment on the surface level. We
+have to assume that there can be an arbitrary
+amount of comments, each having an arbitrary
+amount of children, and arbitrary depth as well.
+*/
