@@ -448,6 +448,34 @@ class Comment {
     this.content = content;
     this.children = children;
   }
+  /*
+  Now let's think about how we can use the symbol
+  generator to iterate through each comment in a
+  comment tree. Note that this time, it's a bit
+  more complicated because we can't simply use
+  yield on each comment on the surface level. We
+  have to assume that there can be an arbitrary
+  amount of comments, each having an arbitrary
+  amount of children, and arbitrary depth as well.
+  */
+  *[Symbol.iterator]() {
+    yield this.content;
+    /*
+    Now we have to use yield* on each of the
+    child nodes. Now there's gotcha -- array
+    helpers like forEach and map. It's because
+    of the way generators are implemented in
+    JavaScript.
+
+    We have to use a regular for loop and then
+    use yield* on each child so that the
+    iteration can continue on with each child
+    node.
+    */
+    for (let child of this.children) {
+      yield* child;
+    }
+  }
 }
 
 /*
@@ -475,13 +503,18 @@ tree;
     "children":[]}]}
 */
 
+const values = [];
+for (let value of tree) {
+  values.push(value);
+}
+
+values;
+
 /*
-Now let's think about how we can use the symbol
-generator to iterate through each comment in a
-comment tree. Note that this time, it's a bit
-more complicated because we can't simply use
-yield on each comment on the surface level. We
-have to assume that there can be an arbitrary
-amount of comments, each having an arbitrary
-amount of children, and arbitrary depth as well.
+[
+  "Great post!",
+  "good comment",
+  "bad comment",
+  "meh"
+]
 */
