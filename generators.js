@@ -222,7 +222,7 @@ const engineeringTeamOne = {
   department: 'Engineering',
   lead: 'Jill',
   manager: 'Alex',
-  engineering: 'Dave'
+  engineer: 'Dave'
 };
 
 /*
@@ -243,7 +243,7 @@ team member.
 function* EngineeringTeamIterator(team) {
   yield team.lead;
   yield team.manager;
-  yield team.engineering;
+  yield team.engineer;
 }
 
 const namesOne = [];
@@ -274,7 +274,7 @@ const engineeringTeamTwo = {
   department: 'Engineering',
   lead: 'Jill',
   manager: 'Alex',
-  engineering: 'Dave',
+  engineer: 'Dave',
   testingTeam: testingTeamOne
 };
 
@@ -377,8 +377,14 @@ const engineeringTeamThree = {
   department: 'Engineering',
   lead: 'Jill',
   manager: 'Alex',
-  engineering: 'Dave',
+  engineer: 'Dave',
   testingTeam: testingTeamTwo
+  [Symbol.iterator]: function* () {
+    yield this.lead;
+    yield this.manager;
+    yield this.engineer;
+    yield* this.testingTeam;
+  }
 };
 
 engineeringTeamThree;
@@ -399,14 +405,17 @@ it will go through that function as it
 continues iterating.
 */
 
-function *TeamIteratorTwo(team) {
-  const engineeringTeamIterator = EngineeringTeamIterator(team);
-  yield* engineeringTeamIterator;
-  yield* team.testingTeam;
-}
-
 const namesThree = [];
-for (let name of TeamIteratorTwo(engineeringTeamThree)) {
+
+/*
+Now we can use the for loop directly on the
+engineering team object. And it works because
+the symbol iterator that is in the engineering
+object, will tell the for loop how it should
+iterate through it.
+*/
+
+for (let name of engineeringTeamThree) {
   namesThree.push(name);
 }
 
