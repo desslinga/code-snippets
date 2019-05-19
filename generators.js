@@ -55,7 +55,7 @@ function* myGenerator() { ... }
 function *myGenerator() { ... }
 */
 
-function* numbers() {
+function* numbersGenerator() {
   /*
   The yield keyword is special and particular
   for generators.
@@ -69,9 +69,9 @@ and then use .next() multiple times. This is
 strange, but we'll make it clear later on.
 */
 
-const gen = numbers();
-gen.next(); // { "done": false }
-gen.next(); // { "done": true }
+const numbersGen = numbersGenerator();
+numbersGen.next(); // { "done": false }
+numbersGen.next(); // { "done": true }
 
 /*
 We're gonna explain generators with an analogy
@@ -165,20 +165,20 @@ iterators, and the such. For this, Let's
 create a new generator 'colors'.
 */
 
-function* colors() {
+function* colorsGenerator() {
   yield 'red';
   yield 'blue';
   yield 'green';
 }
 
-const gen = colors();
-gen.next();
+const colorsGen = colorsGenerator();
+colorsGen.next();
 // { "value": "red", "done": false }
-gen.next();
+colorsGen.next();
 // { "value": "blue", "done": false }
-gen.next();
+colorsGen.next();
 // { "value": "green", "done": false }
-gen.next();
+colorsGen.next();
 // { "done": true }
 
 /*
@@ -196,7 +196,7 @@ it is already handled in the for-of loop.
 */
 
 const myColors = [];
-for (let color of colors()) {
+for (let color of colorsGenerator()) {
   myColors.push(color);
 }
 
@@ -264,7 +264,7 @@ testing team will consist of a lead, and a
 tester.
 */
 
-const testingTeam = {
+const testingTeamOne = {
   lead: 'Amanda',
   tester: 'Bill'
 };
@@ -275,10 +275,11 @@ const engineeringTeamTwo = {
   lead: 'Jill',
   manager: 'Alex',
   engineering: 'Dave',
-  testingTeam: testingTeam
+  testingTeam: testingTeamOne
 };
 
 engineeringTeamTwo;
+
 /*
 Now we want to modify our team iterator so
 that it'll also iterate through the testing
@@ -306,7 +307,7 @@ when we've finished iterating through the
 main engineering team.
 */
 
-function* TeamIterator(team) {
+function* TeamIteratorOne(team) {
   /*
   We create variables where we call each of
   the generators with the corresponding team.
@@ -331,9 +332,83 @@ function* TeamIterator(team) {
 }
 
 const namesTwo = [];
-for (let name of TeamIterator(engineeringTeamTwo)) {
+for (let name of TeamIteratorOne(engineeringTeamTwo)) {
   namesTwo.push(name);
 }
 
 namesTwo;
+// ["Jill", "Alex", "Dave", "Amanda", "Bill"]
+
+/*
+This is all fine and well, but there are some
+improvements to be made. First, the team
+objects and their iterators are completely
+separated from each other (two different
+elements!) Furthermore, when we want to
+actually iterate through some team, we have
+to call the iterator function, and then
+pass the appropriate team object into it.
+
+Fortunately, we have another ES6 feature: the
+symbol iterator. The role of the symbol
+iterator, in summary, is to tell an object
+how to respond to a for loop -- if one is
+being used against it.
+*/
+
+const testingTeamTwo = {
+  lead: 'Amanda',
+  tester: 'Bill',
+  /*
+  This is just a key-value pair, but it is
+  used specially for generators. Note also
+  that we use yield with this.lead and
+  this.tester, because this function resides
+  in the testing team object.
+  */
+  [Symbol.iterator]: function* () {
+    yield this.lead;
+    yield this.tester;
+  }
+}
+
+const engineeringTeamThree = {
+  size: 3,
+  department: 'Engineering',
+  lead: 'Jill',
+  manager: 'Alex',
+  engineering: 'Dave',
+  testingTeam: testingTeamTwo
+};
+
+engineeringTeamThree;
+
+/*
+To use generator delegation with the symbol
+iterator, we simply use yield* on that
+object method team.testingTeam. We no longer
+have to call the iterator with the testing
+team object. We simply call team.testingTeam,
+and behaviour delegation will work as wanted.
+
+Once again, yield* will act like a trap door
+for any for loop that comes across it. In
+this case, the for loop, when it encounters
+yield* used on the symbol iterator function,
+it will go through that function as it
+continues iterating.
+*/
+
+function *TeamIteratorTwo(team) {
+  const engineeringTeamIterator = EngineeringTeamIterator(team);
+  yield* engineeringTeamIterator;
+  yield* team.testingTeam;
+}
+
+const namesThree = [];
+for (let name of TeamIteratorTwo(engineeringTeamThree)) {
+  namesThree.push(name);
+}
+
+namesThree;
 // ["Jill", "Alex", "Dave", "Amanda", "Bill"]
