@@ -26,4 +26,19 @@ asynchronous request has finished? This is what
 Promises are trying to solve. We want to delay the
 console.log(data) call until after we get the result
 back from the asynchronous request.
+
+A Promise can be in one of three states; either
+unresolved, resolved, or rejected. Unresolved is the
+default state for a Promise. It means that a Promise
+has been created and we're waiting for it to finish.
+A Promise that is unresolved will eventually be
+resolved or rejected.
+
+If a Promise is resolved, it means that its process
+has finished and everything went well. The callback
+to handle a succesfully finished Promise is 'then'
+
+If a Promise has been rejected, then something has
+finished, but something went wrong in the process.
+The callback to handle a failed Promise is 'catch'
 */
