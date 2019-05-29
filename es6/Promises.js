@@ -40,5 +40,25 @@ to handle a succesfully finished Promise is 'then'
 
 If a Promise has been rejected, then something has
 finished, but something went wrong in the process.
-The callback to handle a failed Promise is 'catch'
+The callback to handle a failed Promise is 'catch.'
+
+One other thing to note is that Ajax requests are not
+tightly coupled with the concept of Promises. So we
+can have Ajax requests without Promises, and vice
+versa.
 */
+
+/*
+We create a Promise using the 'new' keyword, then
+create a Promise object with a resolver function as
+an argument. The resolver function takes two
+arguments: resolve, and reject.
+*/
+const promise = new Promise((resolve, reject) => {
+  /*
+  To resolve the promise, we call the resolve()
+  function, and to reject a promise, we call the
+  reject() function.
+  */
+  resolve();
+});
