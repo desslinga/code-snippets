@@ -28,15 +28,15 @@ console.log(data) call until after we get the result
 back from the asynchronous request.
 
 A Promise can be in one of three states; either
-unresolved, resolved, or rejected. Unresolved is the
-default state for a Promise. It means that a Promise
-has been created and we're waiting for it to finish.
-A Promise that is unresolved will eventually be
-resolved or rejected.
+unresolved, resolved, or rejected. Unresolved (pending)
+is the default state for a Promise. It means that a
+Promise has been created and we're waiting for it to
+finish. A Promise that is unresolved will eventually
+be resolved or rejected.
 
 If a Promise is resolved, it means that its process
 has finished and everything went well. The callback
-to handle a succesfully finished Promise is 'then'
+to handle a succesfully finished Promise is 'then.'
 
 If a Promise has been rejected, then something has
 finished, but something went wrong in the process.
@@ -62,3 +62,23 @@ const promise = new Promise((resolve, reject) => {
   */
   resolve();
 });
+
+/*
+We register a callback like so:
+*/
+
+promise
+  .then(() => console.log('finally finished!'))
+  .then(() => console.log('i was also ran!!!'))
+  .catch(() => console.log('an error occurred!'));
+
+/*
+So whenever the promise resolves, that function
+passed in .then() will be called. We can also
+chain .then() functions if we want to chain some
+sequential code.
+
+We can also have a .catch() block, and pass a
+function into it. That function will get called if
+the promise was rejected.
+*/
