@@ -60,7 +60,26 @@ const promise = new Promise((resolve, reject) => {
   function, and to reject a promise, we call the
   reject() function.
   */
-  resolve();
+
+  /*
+  When it comes to promises, it all depends on the
+  browser on how long it takes for a promise to
+  resolve. Let's simulate this wait time by using
+  setTimeout(). If you run this code, the promise
+  will be pending for around 3 seconds, and then
+  the appropriate callbacks will be called.
+
+  setTimeout(() => {
+    resolve();
+  }, 3000);
+
+  For a more practical example, we have an XHTMLRequest.
+  */
+  var request = new XHTMLRequest();
+  // make request
+  request.onload = () => {
+    resolve();
+  }
 });
 
 /*
