@@ -101,3 +101,37 @@ We can also have a .catch() block, and pass a
 function into it. That function will get called if
 the promise was rejected.
 */
+
+/*
+The most practical use of promises in ES6 is with
+the fetch helper, which is now native to JavaScript
+with ES6.
+*/
+
+let url = "https://jsonplaceholder.typicode.com/posts";
+
+/*
+Here's how we create an Ajax request with fetch:
+*/
+fetch(url)
+  .then(response => console.log(response.json()))
+  .then(data => console.log(data));
+
+/*
+The 'response.json()' call returns the data we
+actually care about... which is an array of posts.
+
+The 'data' object returns the following:
+
+Response {type: "basic", url: "https://jsonplaceholder.typicode.com/posts", redirected: false, status: 200, ok: true, …}
+body: (...)
+bodyUsed: false
+headers: Headers {}
+ok: true
+redirected: false
+status: 200
+statusText: ""
+type: "basic"
+url: "https://jsonplaceholder.typicode.com/posts"
+__proto__: Response
+*/
