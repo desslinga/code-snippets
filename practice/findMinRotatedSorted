@@ -1,0 +1,12 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findMin = function(nums) {
+    if (nums.length === 1 || (nums[0] <= nums[nums.length - 1])) return nums[0];
+    else {
+        let splitter = Math.floor(nums.length / 2);
+        return Math.min(findMin(nums.slice(0, splitter)),
+                        findMin(nums.slice(splitter, nums.length)));
+    }
+};
